@@ -1,0 +1,61 @@
+extends ../layout/base 
+block content 
+	section.content-header 
+		h1 
+			| Edit Heavenly Studio Employee List
+	section.content
+		.box
+			.box-header.with-border
+				.box-tools.pull-right
+					button(type='button', data-widget='collapse', data-toggle='tooltip',title='collapse').btn.btn-box-tool
+						i.fa.fa-minus
+					
+			.box-body
+				form(role='form',method='post' action='/customers/edit/#{(id==undefined) ? data.id : id}')
+					.row
+						
+						.col-xs-6
+							.box-body
+								- if (messages.msg_error) 
+									.alert.alert-danger.alert-dismissable 
+										button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+											| ×
+										h4
+											i.icon.fa.fa-ban
+											| Alert! 
+										| !{messages.msg_error}
+								- if (messages.msg_info) 
+									.alert.alert-success.alert-dismissable 
+										button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+											| ×
+										h4
+											i.icon.fa.fa-ban
+											| Success! 
+										| !{messages.msg_info}
+								.form-group
+									label
+										| Name
+									input(type='text',value="#{ (name == undefined) ? data.name : name}",name='name',placeholder='Enter Name').form-control
+								.form-group
+									label
+										| Gender
+									input(type='text',value="#{ (gender == undefined) ? data.gender : gender }",name='gender',placeholder='Enter Gender').form-control
+									.form-group
+									label
+										| Address 
+									input(value="#{ (address == undefined) ? data.address : address }",name='address',placeholder='Enter Address').form-control
+								.form-group
+									label
+										| Department
+									input(type='text',value="#{ (dep == undefined) ? data.dep : dep }",name='dep',placeholder='Enter Department').form-control
+								.form-group
+									label
+										| Position
+									input(type='text',value="#{ (position == undefined) ? data.position : position }",name='position',placeholder='Enter Position').form-control
+							.box-footer
+								input(type="hidden",name="_method", value="PUT")
+								button(type='submit').btn.btn-primary
+									i.fa.fa-pencil 
+									|  Edit
+								a(href='/customers').btn.btn-primary.pull-right
+									| Back
